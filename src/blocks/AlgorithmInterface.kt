@@ -25,6 +25,7 @@ interface AlgorithmInterface {
         Statics.alphabets.forEach { alphabet ->
             if (char in alphabetsMap.getValue(alphabet)) {
                 result = alphabet
+                return@forEach
             }
         }
 

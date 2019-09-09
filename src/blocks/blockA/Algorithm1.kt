@@ -67,11 +67,13 @@ class Algorithm1 : AlgorithmInterface {
                 else -> {
                     val alphabet = alphabetsMap.getValue(getCharAlphabet(char))
 
-                    result += (alphabet.count() - (char - alphabet.first()) + 1).toChar()
+                    val meh = (alphabet.count() - (char - alphabet.first()) + 1 + alphabet.first())
+                    print("${meh.toChar()} -> $meh")
+//                    result += (alphabet.count() - (char - alphabet.first() + 1) + 1).toChar()
                 }
             }
         }
 
-        print(result)
+//        print(result)
     }
 }
