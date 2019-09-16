@@ -1,13 +1,10 @@
 package blocks.blockA
 
 import blocks.AlgorithmInterface
-import helpers.Printer
 import managers.MainMenu
-import sources.Statics
-import sources.*
-import java.lang.Exception
+import sources.alphabetsMap
 
-class Algorithm1 : AlgorithmInterface {
+class Algorithm2 : AlgorithmInterface {
     override lateinit var data: String
     override lateinit var parsedData: ArrayList<Int>
 
@@ -20,9 +17,9 @@ class Algorithm1 : AlgorithmInterface {
                 else -> {
                     val alphabet = alphabetsMap.getValue(getCharAlphabet(char))
 
-                    val meh = (
-                            alphabet.count() - getCharPosition(char, alphabet) + 1 // формула алгоритма
-                            ) + (alphabet.first() - 1)
+                    val meh = (getCharPosition(char, alphabet) + 3).rem(alphabet.count()) + (alphabet.first() - 1)
+
+                    print("$meh => ${meh.toChar()}\n")
 
                     meh.toChar()
                 }

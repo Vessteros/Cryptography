@@ -1,6 +1,6 @@
 package managers
 
-import blocks.blockA.Algorithm1
+import blocks.blockA.*
 import helpers.*
 
 object MainMenu : MenuInterface {
@@ -46,7 +46,7 @@ object MainMenu : MenuInterface {
                 }
 
                 4 -> {
-                    Algorithm1().startAlgorithmLogic()
+                    Algorithm3().startAlgorithmLogic()
                 }
 
                 0 -> {

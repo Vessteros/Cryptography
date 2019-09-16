@@ -7,7 +7,9 @@ import managers.DeleteAlphabetMenu
 
 object Statics {
     val alphabets = arrayListOf<String>()
+
     var isFileInput = false
+
     lateinit var algoritm: AlgorithmInterface
 
     fun addAlphabet(alphabetNum: Int) {
