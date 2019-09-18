@@ -1,6 +1,7 @@
 package sources
 
 import blocks.AlgorithmInterface
+import blocks.blockA.*
 import helpers.Printer
 import managers.AlphabetMenu
 import managers.DeleteAlphabetMenu
@@ -10,15 +11,21 @@ object Statics {
 
     var isFileInput = false
 
-    var algorithmPull: HashMap<String, ArrayList<String>> = hashMapOf(
-        "А" to arrayListOf(
-            "Алгоритм 1",
-            "Алгоритм 2",
-            "Алгоритм 3"
+    val algorithmPull: HashMap<String, HashMap<Int, String>> = hashMapOf(
+        "А" to hashMapOf(
+            1 to "Алгоритм 1",
+            2 to "Алгоритм 2",
+            3 to "Алгоритм 3"
         )
     )
 
-    lateinit var algoritm: AlgorithmInterface
+    val algorithmMap = hashMapOf(
+        "Алгоритм 1" to Algorithm1(),
+        "Алгоритм 2" to Algorithm2(),
+        "Алгоритм 3" to Algorithm3()
+    )
+
+    lateinit var algorithm: AlgorithmInterface
 
     fun addAlphabet(alphabetNum: Int) {
         val alphabetName = alphabetsMapNames.getValue(alphabetNum)

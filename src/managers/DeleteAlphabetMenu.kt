@@ -27,6 +27,8 @@ object DeleteAlphabetMenu : MenuInterface {
             val copy = command.toInt()
             if (copy == 0 ) {
                 AlphabetMenu.printMenuCommandList()
+            } else {
+                commandTypeError()
             }
         } else {
             when (command) {
