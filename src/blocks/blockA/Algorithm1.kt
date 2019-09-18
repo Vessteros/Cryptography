@@ -1,11 +1,8 @@
 package blocks.blockA
 
 import blocks.AlgorithmInterface
-import helpers.Printer
 import managers.MainMenu
-import sources.Statics
 import sources.*
-import java.lang.Exception
 
 class Algorithm1 : AlgorithmInterface {
     override lateinit var data: String

@@ -10,6 +10,14 @@ object Statics {
 
     var isFileInput = false
 
+    var algorithmPull: HashMap<String, ArrayList<String>> = hashMapOf(
+        "А" to arrayListOf(
+            "Алгоритм 1",
+            "Алгоритм 2",
+            "Алгоритм 3"
+        )
+    )
+
     lateinit var algoritm: AlgorithmInterface
 
     fun addAlphabet(alphabetNum: Int) {
