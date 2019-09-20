@@ -2,6 +2,7 @@ package managers
 
 import blocks.blockA.*
 import helpers.*
+import sources.Statics
 
 object MainMenu : MenuInterface {
     override fun printMenuCommandList() {
@@ -48,7 +49,7 @@ object MainMenu : MenuInterface {
                 }
 
                 4 -> {
-                    Algorithm3().startAlgorithmLogic()
+                    Statics.algorithm.startAlgorithmLogic()
                 }
 
                 0 -> {
