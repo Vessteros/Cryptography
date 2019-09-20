@@ -11,7 +11,7 @@ object AddAlphabetMenu : MenuInterface{
         Printer.commandList()
 
         alphabetsMapNames.forEach { (i, alphabetName) ->
-            print("\t${Printer.ANSI_CYAN}{$i}${Printer.ANSI_RESET} - Добавить $alphabetName в пул;")
+            print("\t${Printer.ANSI_CYAN}{$i}${Printer.ANSI_RESET} - Добавить ${Printer.ANSI_GREEN}$alphabetName${Printer.ANSI_RESET} в пул;")
 
             if (alphabetName in Statics.alphabets) {
                 print(" (${Printer.ANSI_GREEN}Добавлено${Printer.ANSI_RESET})")
@@ -20,7 +20,7 @@ object AddAlphabetMenu : MenuInterface{
             print("\n")
         }
 
-        print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться назад;\n\n")
+        print("\n\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться назад;\n\n")
         Printer.delimiterLine()
 
         manageCommand()
@@ -37,6 +37,7 @@ object AddAlphabetMenu : MenuInterface{
                 1,2,3,4,5,6 -> {
                     Statics.addAlphabet(i)
                     manageCommand()
+                    return
                 }
                 else -> commandTypeError()
             }

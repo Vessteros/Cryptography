@@ -3,7 +3,7 @@ package managers
 import helpers.Printer
 import sources.Statics
 
-object AlgorithmChooserMenu: MenuInterface {
+object AlgorithmChooserMenu : MenuInterface {
     lateinit var algorithmPull: HashMap<Int, String>
 
     override fun printMenuCommandList() {
@@ -23,7 +23,9 @@ object AlgorithmChooserMenu: MenuInterface {
             print("\t${Printer.ANSI_CYAN}{$i}${Printer.ANSI_RESET} - Использовать $algorithmName;\n")
         }
 
-        print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться назад;\n")
+        print("\n\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться в главное меню;\n")
+
+        Printer.delimiterLine()
 
         manageCommand()
     }
@@ -34,18 +36,27 @@ object AlgorithmChooserMenu: MenuInterface {
         val command = readLine()!!
 
         if (validateCommand(command)) {
-            val algorithm = algorithmPull.getValue(command.toInt())
-            when(true) {
-                algorithm.isNotEmpty() -> {
+            when (command.toInt()) {
+                0 -> MainMenu.printMenuCommandList()
+                else -> {
+                    if (command.toInt() !in algorithmPull) {
+                        commandTypeError()
+                        manageCommand()
+                        return
+                    }
+                    val algorithm = algorithmPull.getValue(command.toInt())
+
+                    if (algorithm !in Statics.algorithmMap) {
+                        commandTypeError()
+                        manageCommand()
+                        return
+                    }
+
                     Statics.algorithm = Statics.algorithmMap.getValue(algorithm)
                     print("Выбранный алгоритм установлен: $algorithm\n")
 
-                    print("${Statics.algorithm}")
-
                     MainMenu.printMenuCommandList()
                 }
-
-                else -> commandTypeError()
             }
         }
     }

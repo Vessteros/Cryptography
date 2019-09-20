@@ -9,7 +9,7 @@ object InputTypesChooserMenu: MenuInterface {
         Printer.commandList()
         print("\t${Printer.ANSI_CYAN}{1}${Printer.ANSI_RESET} - Считать данные с текстового файла;\n")
         print("\t${Printer.ANSI_CYAN}{2}${Printer.ANSI_RESET} - Считывать данные через терминал;\n")
-        print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться назад;\n")
+        print("\n\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться назад;\n\n")
         Printer.delimiterLine()
 
         manageCommand()

@@ -22,12 +22,13 @@ object AlphabetMenu : MenuInterface {
             Printer.commandList()
             print("\t${Printer.ANSI_CYAN}{1}${Printer.ANSI_RESET} - Добавление алфавита в пул;\n")
             print("\t${Printer.ANSI_CYAN}{2}${Printer.ANSI_RESET} - Удалить алфавит из пула;\n")
+            print("\n\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться в главное меню;\n\n")
         } else {
             Printer.commandList()
             print("\t${Printer.ANSI_CYAN}{1}${Printer.ANSI_RESET} - Добавление алфавита в пул;\n")
+            print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться в главное меню;\n\n")
         }
 
-        print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться в главное меню;\n")
         Printer.delimiterLine()
 
         manageCommand()

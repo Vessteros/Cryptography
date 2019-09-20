@@ -12,7 +12,7 @@ object Statics {
     var isFileInput = false
 
     val algorithmPull: HashMap<String, HashMap<Int, String>> = hashMapOf(
-        "А" to hashMapOf(
+        "A" to hashMapOf(
             1 to "Алгоритм 1",
             2 to "Алгоритм 2",
             3 to "Алгоритм 3"

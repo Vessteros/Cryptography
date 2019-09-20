@@ -13,11 +13,11 @@ object MainMenu : MenuInterface {
             print("\t${Printer.ANSI_CYAN}{2}${Printer.ANSI_RESET} - Управление способом ввода данных;\n")
             print("\t${Printer.ANSI_CYAN}{3}${Printer.ANSI_RESET} - Выбор способа шифрования;\n")
             print("\t${Printer.ANSI_CYAN}{4}${Printer.ANSI_RESET} - Выполнить шифрование данных;\n")
+            print("\n\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Завершить выполнение программы;\n\n")
         } else {
             print("\t${Printer.ANSI_CYAN}{1}${Printer.ANSI_RESET} - Управление подключенными алфавитами;\n")
+            print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Завершить выполнение программы;\n\n")
         }
-
-        print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Завершить выполнение программы;\n")
 
         Printer.delimiterLine()
 

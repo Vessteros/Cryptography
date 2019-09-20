@@ -20,7 +20,9 @@ object BlockChooserMenu : MenuInterface {
             print("\t${Printer.ANSI_CYAN}{$blockName}${Printer.ANSI_RESET} - перейти в Блок $blockName;\n")
         }
 
-        print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться назад;\n")
+        print("\n\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться назад;\n\n")
+
+        Printer.delimiterLine()
 
         manageCommand()
     }

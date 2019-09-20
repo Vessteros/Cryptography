@@ -13,7 +13,7 @@ object InputTypeMenu: MenuInterface {
             print("\t${Printer.ANSI_CYAN}{1}${Printer.ANSI_RESET} - Выбор текстового файла;\n")
         }
 
-        print("\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться в главное меню;\n")
+        print("\n\t${Printer.ANSI_CYAN}{0}${Printer.ANSI_RESET} - Вернуться в главное меню;\n\n")
         Printer.delimiterLine()
 
         manageCommand()
