@@ -16,5 +16,6 @@ object Printer {
     fun commandList() = print("Список исполняемых команд:\n\n")
     fun chooseCommand() = print("${ANSI_YELLOW}Выполнить команду$ANSI_RESET: ")
     fun cryptString() = print("${ANSI_BLUE}Введите строку для шифрования:$ANSI_RESET\n")
+    fun printKeyWord() = print("${ANSI_BLUE}Введите ключ шифрования:$ANSI_RESET\n")
     fun emptyStringType() = print("${ANSI_RED}Была введена пустая строка.${ANSI_RESET}\n")
 }

@@ -34,7 +34,7 @@ object AddAlphabetMenu : MenuInterface{
         if (validateCommand(command)) {
             when (val i = command.toInt()) {
                 0 -> AlphabetMenu.printMenuCommandList()
-                1,2,3,4,5,6 -> {
+                1,2,3,4,5,6,7 -> {
                     Statics.addAlphabet(i)
                     manageCommand()
                     return

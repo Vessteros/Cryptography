@@ -1,6 +1,7 @@
 package blocks.blockA
 
 import blocks.AlgorithmInterface
+import managers.MainMenu
 import sources.Statics
 import sources.alphabetsMap
 
@@ -10,34 +11,57 @@ class Algorithm3 : AlgorithmInterface {
 
     override var result: String = ""
 
-    var parsedAlphabets: Map<String, Map<Char, Pair<Int, Int>>> = mapOf(
-             "asd" to mapOf(
-                'd' to Pair(1,2)
-            )
-    )
+    private lateinit var parsedAlphabets: HashMap<String, HashMap<Char, Pair<Int, Int>>>
 
     override fun encode() {
-        print("${Statics.alphabets}")
         mapAlphabets()
-//        parsedData.forEach { char: Int ->
-//            result += when(true) {
-//                char.toChar() == ' ' -> char.toChar()
-//                else -> {
-//                    val alphabet = alphabetsMap.getValue(getCharAlphabet(char))
-//                }
-//            }
-//        }
+        parsedData.forEach { char: Int ->
+            result += when(true) {
+                char.toChar() == ' ' -> char.toChar()
+                else -> {
+                    var value = Pair(0,0)
+
+                    parsedAlphabets.forEach { (_, map) ->
+                        if (map.containsKey(char.toChar()) && map[char.toChar()] != null) {
+                           value = map[char.toChar()]!!
+                        }
+                    }
+
+                    "${value.first}${value.second} "
+                }
+            }
+        }
+
+        printResult()
+
+        MainMenu.printMenuCommandList()
     }
 
     fun mapAlphabets() {
+        parsedAlphabets = hashMapOf()
+
         Statics.alphabets.forEach { alphabetName ->
-            parseAlphabet(alphabetName)
+            mapAlphabet(alphabetName)
         }
     }
 
-    fun parseAlphabet(alphabetName: String) {
+    fun mapAlphabet(alphabetName: String) {
         val alphabet = alphabetsMap.getValue(alphabetName)
 
-//        parsedAlphabets[alphabetName] =
+        parsedAlphabets[alphabetName] = hashMapOf()
+
+        val meh = when(true) {
+            alphabet.count() <= 36 -> 6
+            else -> 7
+        }
+
+        alphabet.forEach { char ->
+            val pair = Pair(
+                getCharPosition(char, alphabet).div(meh) + 1,
+                getCharPosition(char, alphabet).rem(meh)
+            )
+
+            parsedAlphabets[alphabetName]!![char.toChar()] = pair
+        }
     }
 }

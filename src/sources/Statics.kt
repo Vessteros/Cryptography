@@ -16,13 +16,19 @@ object Statics {
             1 to "Алгоритм 1",
             2 to "Алгоритм 2",
             3 to "Алгоритм 3"
+        ),
+        "B" to hashMapOf(
+            1 to "Алгоритм 4",
+            2 to "Алгоритм 5"
         )
     )
 
     val algorithmMap = hashMapOf(
         "Алгоритм 1" to Algorithm1(),
         "Алгоритм 2" to Algorithm2(),
-        "Алгоритм 3" to Algorithm3()
+        "Алгоритм 3" to Algorithm3(),
+        "Алгоритм 4" to blocks.blockB.Algorithm4(),
+        "Алгоритм 5" to blocks.blockB.Algorithm5()
     )
 
     lateinit var algorithm: AlgorithmInterface

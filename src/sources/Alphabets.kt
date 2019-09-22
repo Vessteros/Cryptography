@@ -19,7 +19,8 @@ val alphabetsMapNames = mapOf(
     3 to "engLower",
     4 to "engUpper",
     5 to "numbers",
-    6 to "spChars"
+    6 to "spChars",
+    7 to "united"
 )
 
 val alphabetsMap = mapOf(
@@ -28,5 +29,6 @@ val alphabetsMap = mapOf(
     "engLower" to engLower,
     "engUpper" to engUpper,
     "numbers"  to numbers,
-    "spChars"  to spChars
+    "spChars"  to spChars,
+    "united"   to united
 )

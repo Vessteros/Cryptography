@@ -79,7 +79,10 @@ interface AlgorithmInterface {
 
     fun getCharPosition(char: Int, alphabet: Iterable<Int>) = char - (alphabet.first() - 1)
 
+    fun getCharTextPosition(char: Int, parsedData: ArrayList<Int>) = parsedData.indexOf(char) + 1
+
     fun printResult() {
         print("${Printer.ANSI_BLUE}Результат шифрования: ${Printer.ANSI_RESET}\n${Printer.ANSI_PURPLE}$result${Printer.ANSI_RESET}\n")
+        result = ""
     }
 }

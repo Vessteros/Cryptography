@@ -53,7 +53,7 @@ object MainMenu : MenuInterface {
 
                 0 -> {
                     Printer.delimiterLine()
-                    print("Завершение работы.\n")
+                    print("${Printer.ANSI_BLUE}Завершение работы.${Printer.ANSI_RESET}\n")
                     Printer.delimiterLine()
                 }
 
