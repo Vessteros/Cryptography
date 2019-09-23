@@ -3,7 +3,9 @@ package blocks
 import helpers.Printer
 import managers.MainMenu
 import sources.Statics
-import sources.alphabetsMap
+
+const val errorChar = "В веденной последовательности присутствует символ из неподключенного алфавита.\n" +
+        "Подключите дополнительные алфавиты, либо проверьте введенную последовательность."
 
 interface AlgorithmInterface {
     var data: String
@@ -57,29 +59,26 @@ interface AlgorithmInterface {
 
     fun encode()
 
-    fun getCharAlphabet(char: Int): String {
-        var result = ""
+    fun getCharAlphabet(char: Int): ArrayList<Int> {
+        var result = arrayListOf<Int>()
         // костыль
-        Statics.alphabets.forEach { alphabet ->
-            if (char in alphabetsMap.getValue(alphabet)) {
+        Statics.connectedAlphabets.forEach { alphabet ->
+            if (char in alphabet) {
                 result = alphabet
                 return@forEach
             }
         }
 
-        if (result == "") {
-            throw Exception(
-                "В веденной последовательности присутствует символ из неподключенного алфавита.\n" +
-                "Подключите дополнительные алфавиты, либо проверьте введенную последовательность."
-            )
+        if (result.isNullOrEmpty()) {
+            throw Exception(errorChar)
         }
 
         return result
     }
 
-    fun getCharPosition(char: Int, alphabet: Iterable<Int>) = char - (alphabet.first() - 1)
+    fun <T> ArrayList<T>.getCharPosition(char: T) = this.indexOf(char)
 
-    fun getCharTextPosition(char: Int, parsedData: ArrayList<Int>) = parsedData.indexOf(char) + 1
+    fun <R, T : ArrayList<R>> T.getAlphabetCountable() = this.count() - 1
 
     fun printResult() {
         print("${Printer.ANSI_BLUE}Результат шифрования: ${Printer.ANSI_RESET}\n${Printer.ANSI_PURPLE}$result${Printer.ANSI_RESET}\n")

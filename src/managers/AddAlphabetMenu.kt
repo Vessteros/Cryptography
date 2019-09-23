@@ -2,6 +2,7 @@ package managers
 
 import helpers.*
 import sources.Statics
+import sources.alphabetsMap
 import sources.alphabetsMapNames
 
 object AddAlphabetMenu : MenuInterface{
@@ -13,7 +14,7 @@ object AddAlphabetMenu : MenuInterface{
         alphabetsMapNames.forEach { (i, alphabetName) ->
             print("\t${Printer.ANSI_CYAN}{$i}${Printer.ANSI_RESET} - Добавить ${Printer.ANSI_GREEN}$alphabetName${Printer.ANSI_RESET} в пул;")
 
-            if (alphabetName in Statics.alphabets) {
+            if (alphabetsMap.getValue(alphabetName) in Statics.connectedAlphabets) {
                 print(" (${Printer.ANSI_GREEN}Добавлено${Printer.ANSI_RESET})")
             }
 

@@ -5,7 +5,7 @@ import sources.Statics
 
 interface MenuInterface {
     val alphabetsListNotEmpty
-        get() = Statics.alphabets.isNotEmpty()
+        get() = Statics.connectedAlphabets.isNotEmpty()
 
     fun printMenuCommandList()
 

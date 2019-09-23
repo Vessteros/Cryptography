@@ -1,9 +1,9 @@
 package blocks.blockA
 
 import blocks.AlgorithmInterface
+import blocks.errorChar
 import managers.MainMenu
 import sources.Statics
-import sources.alphabetsMap
 
 class Algorithm3 : AlgorithmInterface {
     override lateinit var data: String
@@ -11,24 +11,26 @@ class Algorithm3 : AlgorithmInterface {
 
     override var result: String = ""
 
-    private lateinit var parsedAlphabets: HashMap<String, HashMap<Char, Pair<Int, Int>>>
+    private var parsedAlphabets: ArrayList<HashMap<Char, Pair<Int, Int>>> = arrayListOf()
 
     override fun encode() {
         mapAlphabets()
         parsedData.forEach { char: Int ->
-            result += when(true) {
-                char.toChar() == ' ' -> char.toChar()
-                else -> {
-                    var value = Pair(0,0)
+            result += run {
+                var value = Pair(0, 0)
 
-                    parsedAlphabets.forEach { (_, map) ->
-                        if (map.containsKey(char.toChar()) && map[char.toChar()] != null) {
-                           value = map[char.toChar()]!!
+                // Не учтено, что буква может отсутствовать в parsedAlphabets
+                parsedAlphabets.forEach { map ->
+                    map[char.toChar()].let { pair ->
+                        if (pair == null) {
+                            throw Exception(errorChar)
                         }
-                    }
 
-                    "${value.first}${value.second} "
+                        value = pair
+                    }
                 }
+
+                "${value.first}${value.second} "
             }
         }
 
@@ -38,30 +40,28 @@ class Algorithm3 : AlgorithmInterface {
     }
 
     private fun mapAlphabets() {
-        parsedAlphabets = hashMapOf()
-
-        Statics.alphabets.forEach { alphabetName ->
+        Statics.connectedAlphabets.forEach { alphabetName ->
             mapAlphabet(alphabetName)
         }
     }
 
-    private fun mapAlphabet(alphabetName: String) {
-        val alphabet = alphabetsMap.getValue(alphabetName)
-
-        parsedAlphabets[alphabetName] = hashMapOf()
-
-        val meh = when(true) {
+    private fun mapAlphabet(alphabet: ArrayList<Int>) {
+        val meh = when (true) {
             alphabet.count() <= 36 -> 6
             else -> 7
         }
 
+        val parsedAlphabet = hashMapOf<Char, Pair<Int, Int>>()
+
         alphabet.forEach { char ->
             val pair = Pair(
-                getCharPosition(char, alphabet).div(meh) + 1,
-                getCharPosition(char, alphabet).rem(meh)
+                alphabet.getCharPosition(char).div(meh),
+                alphabet.getCharPosition(char).rem(meh)
             )
 
-            parsedAlphabets[alphabetName]!![char.toChar()] = pair
+            parsedAlphabet[char.toChar()] = pair
         }
+
+        parsedAlphabets.add(parsedAlphabet)
     }
 }

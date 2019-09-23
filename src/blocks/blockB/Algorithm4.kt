@@ -13,18 +13,14 @@ class Algorithm4 : AlgorithmInterface {
 
     override fun encode() {
         parsedData.forEach { char: Int ->
-            result += when (true) {
-                char.toChar() == ' ' -> char.toChar()
-                else -> {
-                    val alphabet = alphabetsMap.getValue(getCharAlphabet(char))
-                    val alphabetCount = alphabet.count()
+            result += run {
+                val alphabet = getCharAlphabet(char)
+                val alphabetCount = alphabet.count()
 
-                    val meh = (
-                            getCharPosition(char, alphabet) + 2*getCharTextPosition(char, parsedData) + 15
-                            ).rem(alphabetCount) + (alphabet.first() - 1)
+                val meh =
+                    (alphabet.getCharPosition(char) + 2 * parsedData.getCharPosition(char) + 15).rem(alphabetCount)
 
-                    meh.toChar()
-                }
+                alphabet[meh].toChar()
             }
         }
 

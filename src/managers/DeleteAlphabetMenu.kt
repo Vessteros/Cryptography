@@ -43,7 +43,7 @@ object DeleteAlphabetMenu : MenuInterface {
 
     }
 
-    fun printAlphabetList() = Statics.alphabets.forEach { alphabetName ->
+    fun printAlphabetList() = Statics.connectedAlphabets.forEach { alphabetName ->
         print("\t${Printer.ANSI_CYAN}> ${Printer.ANSI_GREEN}$alphabetName${Printer.ANSI_RESET}\n")
     }
 }

@@ -10,7 +10,7 @@ object AlphabetMenu : MenuInterface {
         if (alphabetsListNotEmpty) {
             print("Подключенные алфавиты:\n\t{ ")
             var i = 1
-            Statics.alphabets.forEach { alphabetName ->
+            Statics.connectedAlphabets.forEach { alphabetName ->
                 print("${Printer.ANSI_GREEN}$alphabetName ${Printer.ANSI_RESET}")
                 if (i % 3 == 0 && i < alphabetsMap.count()) {
                     print("}\n\t{ ")

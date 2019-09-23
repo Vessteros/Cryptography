@@ -7,7 +7,7 @@ import managers.AlphabetMenu
 import managers.DeleteAlphabetMenu
 
 object Statics {
-    val alphabets = arrayListOf<String>()
+    val connectedAlphabets = arrayListOf<ArrayList<Int>>()
 
     var isFileInput = false
 
@@ -35,8 +35,8 @@ object Statics {
 
     fun addAlphabet(alphabetNum: Int) {
         val alphabetName = alphabetsMapNames.getValue(alphabetNum)
-        if (alphabetName !in alphabets) {
-            alphabets.add(alphabetName)
+        if (alphabetsMap.getValue(alphabetName) !in connectedAlphabets) {
+            connectedAlphabets.add(alphabetsMap.getValue(alphabetName))
             print("Алфавит {${Printer.ANSI_GREEN}$alphabetName${Printer.ANSI_RESET}} добавлен в пул.\n")
         } else {
             print("${Printer.ANSI_RED}Выбранный алфавит уже находится в пуле.${Printer.ANSI_RESET}\n")
@@ -46,11 +46,11 @@ object Statics {
     }
 
     fun deleteAlphabet(alphabetName: String) {
-        if (alphabetName in alphabets) {
-            alphabets.remove(alphabetName)
+        if (alphabetsMap.getValue(alphabetName) in connectedAlphabets) {
+            connectedAlphabets.remove(alphabetsMap.getValue(alphabetName))
             print("Алфавит {${Printer.ANSI_GREEN}$alphabetName${Printer.ANSI_RESET}} был удален из пула.\n")
 
-            if (alphabets.isNotEmpty()) {
+            if (connectedAlphabets.isNotEmpty()) {
                 print("\n")
                 DeleteAlphabetMenu.printAlphabetList()
                 print("\n")
