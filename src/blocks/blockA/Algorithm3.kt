@@ -37,7 +37,7 @@ class Algorithm3 : AlgorithmInterface {
         MainMenu.printMenuCommandList()
     }
 
-    fun mapAlphabets() {
+    private fun mapAlphabets() {
         parsedAlphabets = hashMapOf()
 
         Statics.alphabets.forEach { alphabetName ->
@@ -45,7 +45,7 @@ class Algorithm3 : AlgorithmInterface {
         }
     }
 
-    fun mapAlphabet(alphabetName: String) {
+    private fun mapAlphabet(alphabetName: String) {
         val alphabet = alphabetsMap.getValue(alphabetName)
 
         parsedAlphabets[alphabetName] = hashMapOf()
