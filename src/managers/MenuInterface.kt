@@ -17,7 +17,7 @@ interface MenuInterface {
         manageCommand()
     }
 
-    fun validateCommand(command: String): Boolean = try {
+    fun commandIsValid(command: String): Boolean = try {
         command.toInt()
         true
     } catch (e: NumberFormatException) {

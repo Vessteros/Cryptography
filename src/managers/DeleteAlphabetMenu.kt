@@ -1,7 +1,7 @@
 package managers
 
-import helpers.Printer
-import sources.Statics
+import helpers.*
+import sources.*
 
 object DeleteAlphabetMenu : MenuInterface {
     override fun printMenuCommandList() {
@@ -23,7 +23,7 @@ object DeleteAlphabetMenu : MenuInterface {
 
         val command = readLine()!!
 
-        if (validateCommand(command)) {
+        if (commandIsValid(command)) {
             val copy = command.toInt()
             if (copy == 0 ) {
                 AlphabetMenu.printMenuCommandList()
@@ -39,11 +39,9 @@ object DeleteAlphabetMenu : MenuInterface {
                 }
             }
         }
-
-
     }
 
-    fun printAlphabetList() = Statics.connectedAlphabets.forEach { alphabetName ->
-        print("\t${Printer.ANSI_CYAN}> ${Printer.ANSI_GREEN}$alphabetName${Printer.ANSI_RESET}\n")
+    fun printAlphabetList() = Statics.connectedAlphabets.forEach { alphabet ->
+        print("\t${Printer.ANSI_CYAN}> ${Printer.ANSI_GREEN}${alphabetsMap getKeyByValue alphabet}${Printer.ANSI_RESET}\n")
     }
 }

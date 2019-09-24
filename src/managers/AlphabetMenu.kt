@@ -10,8 +10,8 @@ object AlphabetMenu : MenuInterface {
         if (alphabetsListNotEmpty) {
             print("Подключенные алфавиты:\n\t{ ")
             var i = 1
-            Statics.connectedAlphabets.forEach { alphabetName ->
-                print("${Printer.ANSI_GREEN}$alphabetName ${Printer.ANSI_RESET}")
+            Statics.connectedAlphabets.forEach { alphabet ->
+                print("${Printer.ANSI_GREEN}${alphabetsMap getKeyByValue alphabet} ${Printer.ANSI_RESET}")
                 if (i % 3 == 0 && i < alphabetsMap.count()) {
                     print("}\n\t{ ")
                 }
@@ -39,7 +39,7 @@ object AlphabetMenu : MenuInterface {
 
         val command = readLine()!!
 
-        if (MainMenu.validateCommand(command)) {
+        if (commandIsValid(command)) {
             when (command.toInt()) {
                 1 -> AddAlphabetMenu.printMenuCommandList()
                 2 -> {

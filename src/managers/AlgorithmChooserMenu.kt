@@ -35,29 +35,29 @@ object AlgorithmChooserMenu : MenuInterface {
 
         val command = readLine()!!
 
-        if (validateCommand(command)) {
-            when (command.toInt()) {
-                0 -> MainMenu.printMenuCommandList()
-                else -> {
-                    if (command.toInt() !in algorithmPull) {
-                        commandTypeError()
-                        manageCommand()
-                        return
-                    }
-                    val algorithm = algorithmPull.getValue(command.toInt())
-
-                    if (algorithm !in Statics.algorithmMap) {
-                        commandTypeError()
-                        manageCommand()
-                        return
-                    }
-
-                    Statics.algorithm = Statics.algorithmMap.getValue(algorithm)
-                    print("Выбранный алгоритм установлен: $algorithm\n")
-
-                    MainMenu.printMenuCommandList()
+        if (commandIsValid(command)) when (command.toInt()) {
+            0 -> MainMenu.printMenuCommandList()
+            else -> {
+                if (command.toInt() !in algorithmPull) {
+                    commandTypeError()
+                    manageCommand()
+                    return
                 }
+                val algorithm = algorithmPull.getValue(command.toInt())
+
+                if (algorithm !in Statics.algorithmMap) {
+                    commandTypeError()
+                    manageCommand()
+                    return
+                }
+
+                Statics.algorithm = Statics.algorithmMap.getValue(algorithm)
+                print("Выбранный алгоритм установлен: ${Printer.ANSI_GREEN}$algorithm${Printer.ANSI_RESET}\n")
+
+                MainMenu.printMenuCommandList()
             }
+        } else {
+            commandTypeError()
         }
     }
 }

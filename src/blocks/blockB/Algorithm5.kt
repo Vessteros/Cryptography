@@ -1,8 +1,8 @@
 package blocks.blockB
 
 import blocks.AlgorithmInterface
-import helpers.Printer
-import sources.united
+import helpers.*
+import sources.Statics
 
 class Algorithm5 : AlgorithmInterface {
     override lateinit var data: String
@@ -12,20 +12,27 @@ class Algorithm5 : AlgorithmInterface {
     override var result: String = ""
 
     var keyWord: String = ""
+
     lateinit var parsedKey: ArrayList<Int>
+
     var table: ArrayList<ArrayList<Int>> = arrayListOf()
+
+    val alphabet = concatenateArrayLists(*Statics.connectedAlphabets.toTypedArray())
 
     override fun scanFromTerminal() {
         Printer.delimiterLine()
         Printer.cryptString()
 
-        data = readLine()!!
-
-        if (data == "") {
+        readLine().nullOverChecker({
+            data = it!!
+        }, {
             Printer.emptyStringType()
             scanFromTerminal()
-            return
-        }
+
+            return@nullOverChecker
+        }, {
+            it == ""
+        })
 
         parseData()
         scanKeyWord()
@@ -35,18 +42,23 @@ class Algorithm5 : AlgorithmInterface {
         Printer.delimiterLine()
         Printer.printKeyWord()
 
-        keyWord = readLine()!!
-
-        if (keyWord == "") {
+        readLine().nullOverChecker({
+            keyWord = it!!
+        }, {
             Printer.emptyStringType()
             scanFromTerminal()
-            return
-        }
+
+            return@nullOverChecker
+        }, {
+            it == ""
+        })
     }
 
     override fun encode() {
         val keyString = setKeyWordString()
+
         setTable()
+        print("$keyString\n")
         table.forEach { row ->
             print("${row}\n")
         }
@@ -56,32 +68,22 @@ class Algorithm5 : AlgorithmInterface {
         val keyString = arrayListOf<Int>()
         val countData = parsedData.count()
 
-        parsedKey = ArrayList(
-            keyWord
-                .toCharArray()
-                .toList()
-                .map {
-                    it.toInt()
-                }
-        )
+        parsedKey = keyWord.convertToIntArray()
+
         val countKey = parsedKey.count()
 
         if (countKey > countData) {
-            var i = 0
-            parsedKey.forEach { keyChar ->
+            parsedKey.forEachIndexed { index, keyChar ->
                 keyString.add(keyChar)
-                i++
 
-                if (i == countData) {
-                    return@forEach
-                }
+                if (index == countData) return@forEachIndexed
             }
         } else {
-            val mod = countData.rem(countKey)
             val div = countData.div(countKey)
-            var i = 1
+            val mod = countData.rem(countKey)
+            var i = 0
 
-            while (i <= div) {
+            while (i < div) {
                 keyString.addAll(parsedKey)
                 i++
             }
@@ -96,7 +98,8 @@ class Algorithm5 : AlgorithmInterface {
     }
 
     private fun setTable() {
-        table.add(ArrayList(united))
+        table.add(alphabet)
+
         var i = 1
         parsedKey.forEach { char: Int ->
             val row = arrayListOf(char)
@@ -108,8 +111,7 @@ class Algorithm5 : AlgorithmInterface {
     }
 
     private fun setAlphabetWithStep(step: Int): ArrayList<Int> {
-        var meh = arrayListOf<Int>()
-        val alphabet: ArrayList<Int> = united
+        val meh = arrayListOf<Int>()
 
         var start = -step // после того, как цикл подойдет к шндексу превышающему количество элементов алфавита,
         // надо начинать с 0

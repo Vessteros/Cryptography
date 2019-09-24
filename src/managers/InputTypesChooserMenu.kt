@@ -20,7 +20,7 @@ object InputTypesChooserMenu: MenuInterface {
 
         val command = readLine()!!
 
-        if (validateCommand(command)) {
+        if (commandIsValid(command)) {
             when(command.toInt()) {
                 1 -> {
                     Statics.setFileInput()
@@ -33,6 +33,8 @@ object InputTypesChooserMenu: MenuInterface {
                 0 -> InputTypeMenu.printMenuCommandList()
                 else -> commandTypeError()
             }
+        } else {
+            commandTypeError()
         }
     }
 }

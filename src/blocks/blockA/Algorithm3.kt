@@ -1,7 +1,7 @@
 package blocks.blockA
 
 import blocks.AlgorithmInterface
-import blocks.errorChar
+import helpers.Printer.errorChar
 import managers.MainMenu
 import sources.Statics
 
@@ -19,7 +19,6 @@ class Algorithm3 : AlgorithmInterface {
             result += run {
                 var value = Pair(0, 0)
 
-                // Не учтено, что буква может отсутствовать в parsedAlphabets
                 parsedAlphabets.forEach { map ->
                     map[char.toChar()].let { pair ->
                         if (pair == null) {

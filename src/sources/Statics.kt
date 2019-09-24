@@ -31,7 +31,7 @@ object Statics {
         "Алгоритм 5" to blocks.blockB.Algorithm5()
     )
 
-    lateinit var algorithm: AlgorithmInterface
+    var algorithm: AlgorithmInterface? = null
 
     fun addAlphabet(alphabetNum: Int) {
         val alphabetName = alphabetsMapNames.getValue(alphabetNum)

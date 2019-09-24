@@ -29,7 +29,7 @@ object MainMenu : MenuInterface {
 
         val command = readLine()!!
 
-        if (validateCommand(command)) {
+        if (commandIsValid(command)) {
             when (command.toInt()) {
                 1 -> AlphabetMenu.printMenuCommandList()
                 2 -> {
@@ -47,9 +47,15 @@ object MainMenu : MenuInterface {
                     }
                 }
 
-                4 -> {
-                    Statics.algorithm.startAlgorithmLogic()
-                }
+                4 -> Statics.algorithm.nullOverChecker({
+                    it!!.startAlgorithmLogic()
+                }, {
+                    Printer.algorithmNotChosen()
+                    Printer.delimiterLine()
+                    manageCommand()
+
+                    return@nullOverChecker
+                })
 
                 0 -> {
                     Printer.delimiterLine()

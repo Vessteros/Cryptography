@@ -1,11 +1,10 @@
 package blocks
 
+import helpers.*
 import helpers.Printer
+import helpers.Printer.errorChar
 import managers.MainMenu
 import sources.Statics
-
-const val errorChar = "В веденной последовательности присутствует символ из неподключенного алфавита.\n" +
-        "Подключите дополнительные алфавиты, либо проверьте введенную последовательность."
 
 interface AlgorithmInterface {
     var data: String
@@ -35,38 +34,31 @@ interface AlgorithmInterface {
         Printer.delimiterLine()
         Printer.cryptString()
 
-        data = readLine()!!
-
-        if (data == "") {
+        readLine().nullOverChecker({
+            print("7 - $it\n")
+            data = it!!
+        }, {
             Printer.emptyStringType()
             scanFromTerminal()
-            return
-        }
+            return@nullOverChecker
+        }, {
+            it == ""
+        })
+
+        print("8 - $data\n")
 
         parseData()
     }
 
     fun parseData() {
-        parsedData = ArrayList(
-            data
-                .toCharArray()
-                .toList()
-                .map {
-                    it.toInt()
-                }
-        )
+        parsedData = data.convertToIntArray()
     }
 
     fun encode()
 
     fun getCharAlphabet(char: Int): ArrayList<Int> {
-        var result = arrayListOf<Int>()
-        // костыль
-        Statics.connectedAlphabets.forEach { alphabet ->
-            if (char in alphabet) {
-                result = alphabet
-                return@forEach
-            }
+        val result = Statics.connectedAlphabets.first {
+            char in it
         }
 
         if (result.isNullOrEmpty()) {
@@ -76,7 +68,7 @@ interface AlgorithmInterface {
         return result
     }
 
-    fun <T> ArrayList<T>.getCharPosition(char: T) = this.indexOf(char)
+    fun <T> ArrayList<T>.getCharPosition(char: T) = this.indexOf(char) + 1
 
     fun <R, T : ArrayList<R>> T.getAlphabetCountable() = this.count() - 1
 

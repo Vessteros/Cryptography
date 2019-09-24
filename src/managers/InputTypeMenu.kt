@@ -24,7 +24,7 @@ object InputTypeMenu: MenuInterface {
 
         val command = readLine()!!
 
-        if (validateCommand(command)) {
+        if (commandIsValid(command)) {
             when(command.toInt()) {
                 1 -> InputTypesChooserMenu.printMenuCommandList()
                 2 -> {
@@ -35,6 +35,8 @@ object InputTypeMenu: MenuInterface {
                 0 -> MainMenu.printMenuCommandList()
                 else -> commandTypeError()
             }
+        } else {
+            commandTypeError()
         }
     }
 }

@@ -32,7 +32,7 @@ object BlockChooserMenu : MenuInterface {
 
         val command = readLine()!!
 
-        if (validateCommand(command)) {
+        if (commandIsValid(command)) {
             val copy = command.toInt()
             if (copy == 0) {
                 MainMenu.printMenuCommandList()
