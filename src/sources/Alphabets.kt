@@ -63,7 +63,7 @@ val rusUpper = arrayListOf(
     'О'.toInt(),
     'П'.toInt(),
     'Р'.toInt(),
-    'М'.toInt(),
+    'С'.toInt(),
     'Т'.toInt(),
     'У'.toInt(),
     'Ф'.toInt(),

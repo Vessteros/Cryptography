@@ -35,7 +35,6 @@ interface AlgorithmInterface {
         Printer.cryptString()
 
         readLine().nullOverChecker({
-            print("7 - $it\n")
             data = it!!
         }, {
             Printer.emptyStringType()
@@ -44,8 +43,6 @@ interface AlgorithmInterface {
         }, {
             it == ""
         })
-
-        print("8 - $data\n")
 
         parseData()
     }
