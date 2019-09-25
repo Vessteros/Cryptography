@@ -1,7 +1,7 @@
 package blocks.blockA
 
 import blocks.AlgorithmInterface
-import helpers.Printer.errorChar
+import helpers.concatenateArrayLists
 import managers.MainMenu
 import sources.Statics
 
@@ -11,25 +11,22 @@ class Algorithm3 : AlgorithmInterface {
 
     override var result: String = ""
 
-    private var parsedAlphabets: ArrayList<HashMap<Char, Pair<Int, Int>>> = arrayListOf()
+    private val alphabetList = arrayListOf<Int>()
+
+    private val resAlphabet: HashMap<Char, Pair<Int, Int>> = hashMapOf()
 
     override fun encode() {
-        mapAlphabets()
+        mapAlphabet()
+
         parsedData.forEach { char: Int ->
             result += run {
                 var value = Pair(0, 0)
 
-                parsedAlphabets.forEach { map ->
-                    map[char.toChar()].let { pair ->
-                        if (pair == null) {
-                            throw Exception(errorChar)
-                        }
-
-                        value = pair
-                    }
+                resAlphabet[char.toChar()]?.let { pair ->
+                    value = pair
                 }
 
-                "${value.first}${value.second} "
+                "${value.first} ${value.second}  "
             }
         }
 
@@ -38,29 +35,21 @@ class Algorithm3 : AlgorithmInterface {
         MainMenu.printMenuCommandList()
     }
 
-    private fun mapAlphabets() {
-        Statics.connectedAlphabets.forEach { alphabetName ->
-            mapAlphabet(alphabetName)
-        }
-    }
+    private fun mapAlphabet() {
+        alphabetList.addAll(concatenateArrayLists(*Statics.connectedAlphabets.toTypedArray()))
 
-    private fun mapAlphabet(alphabet: ArrayList<Int>) {
         val meh = when (true) {
-            alphabet.count() <= 36 -> 6
+            alphabetList.count() <= 36 -> 6
             else -> 7
         }
 
-        val parsedAlphabet = hashMapOf<Char, Pair<Int, Int>>()
-
-        alphabet.forEach { char ->
+        alphabetList.forEach { char ->
             val pair = Pair(
-                alphabet.getCharPosition(char).div(meh),
-                alphabet.getCharPosition(char).rem(meh)
+                alphabetList.getCharPosition(char).div(meh),
+                alphabetList.getCharPosition(char).rem(meh)
             )
 
-            parsedAlphabet[char.toChar()] = pair
+            resAlphabet[char.toChar()] = pair
         }
-
-        parsedAlphabets.add(parsedAlphabet)
     }
 }

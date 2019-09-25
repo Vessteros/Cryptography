@@ -17,7 +17,8 @@ class Algorithm5 : AlgorithmInterface {
 
     var table: ArrayList<ArrayList<Int>> = arrayListOf()
 
-    val alphabet = concatenateArrayLists(*Statics.connectedAlphabets.toTypedArray())
+    private val alphabet: ArrayList<Int>
+        get() = concatenateArrayLists(*Statics.connectedAlphabets.toTypedArray())
 
     override fun scanFromTerminal() {
         Printer.delimiterLine()
@@ -58,9 +59,9 @@ class Algorithm5 : AlgorithmInterface {
         val keyString = setKeyWordString()
 
         setTable()
-        print("$keyString\n")
+        print("1 - $keyString\n")
         table.forEach { row ->
-            print("${row}\n")
+            print("2 - ${row}\n")
         }
     }
 

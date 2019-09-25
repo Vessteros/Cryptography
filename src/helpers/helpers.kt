@@ -16,7 +16,7 @@ fun <V : Any?> V.nullOverChecker(
 
     customs.forEach { custom ->
         custom?.invoke(this)?.let {
-            it.matchValue(true, {
+            it.matchesValue(true, {
                 affirmative(this)
             })
         }
@@ -25,7 +25,7 @@ fun <V : Any?> V.nullOverChecker(
     return negative(this)
 }
 
-fun <T> T.matchValue(
+fun <T> T.matchesValue(
     value: T,
     affirmative: () -> Unit,
     negative: (() -> Unit)? = null
@@ -49,6 +49,15 @@ fun <T> concatenateArrayLists(vararg arrays: ArrayList<T>): ArrayList<T> {
     }
 
     return resultArray
+}
+
+fun <K, V> concatenateMaps(vararg maps: Map<K, V>): Map<K, V> {
+    val resultMap = mapOf<K, V>()
+    maps.forEach {
+        resultMap.plus(it)
+    }
+
+    return resultMap
 }
 
 infix fun <M : Map<K, V>, K, V> M.getKeyByValue(value: V): K {
