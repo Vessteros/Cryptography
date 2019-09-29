@@ -22,12 +22,12 @@ interface AlgorithmInterface {
             false -> scanFromTerminal()
         }
 
-        try {
+//        try {
             encode()
-        } catch (e: Exception) {
-            print("${Printer.ANSI_RED}${e.message}${Printer.ANSI_RESET}\n")
-            MainMenu.printMenuCommandList()
-        }
+//        } catch (e: Exception) {
+//            print("${Printer.ANSI_RED}${e.message}${Printer.ANSI_RESET}\n")
+//            MainMenu.printMenuCommandList()
+//        }
     }
 
     fun scanFromTerminal() {

@@ -2,6 +2,7 @@ package blocks.blockB
 
 import blocks.AlgorithmInterface
 import helpers.*
+import managers.MainMenu
 import sources.Statics
 
 class Algorithm5 : AlgorithmInterface {
@@ -11,11 +12,11 @@ class Algorithm5 : AlgorithmInterface {
 
     override var result: String = ""
 
-    var keyWord: String = ""
+    private var keyWord: String = ""
 
-    lateinit var parsedKey: ArrayList<Int>
+    private lateinit var parsedKey: ArrayList<Int>
 
-    var table: ArrayList<ArrayList<Int>> = arrayListOf()
+    private var table: ArrayList<ArrayList<Int>> = arrayListOf()
 
     private val alphabet: ArrayList<Int>
         get() = concatenateArrayLists(*Statics.connectedAlphabets.toTypedArray())
@@ -59,10 +60,17 @@ class Algorithm5 : AlgorithmInterface {
         val keyString = setKeyWordString()
 
         setTable()
-        print("1 - $keyString\n")
-        table.forEach { row ->
-            print("2 - ${row}\n")
+
+        parsedData.forEach { char ->
+            val charPos = parsedData.indexOf(char)
+            result += table.first {
+                it.first() == keyString[charPos]
+            }[charPos].toChar()
         }
+
+        printResult()
+
+        MainMenu.printMenuCommandList()
     }
 
     private fun setKeyWordString(): ArrayList<Int> {
@@ -74,10 +82,12 @@ class Algorithm5 : AlgorithmInterface {
         val countKey = parsedKey.count()
 
         if (countKey > countData) {
-            parsedKey.forEachIndexed { index, keyChar ->
+            parsedKey.forEachIndexed loop@{ index, keyChar ->
                 keyString.add(keyChar)
 
-                if (index == countData) return@forEachIndexed
+                if ((countData - index) == 1) {
+                    return keyString
+                }
             }
         } else {
             val div = countData.div(countKey)
@@ -92,6 +102,7 @@ class Algorithm5 : AlgorithmInterface {
             i = 0
             while (i < mod) {
                 keyString.add(parsedKey[i])
+                i++
             }
         }
 
@@ -104,28 +115,33 @@ class Algorithm5 : AlgorithmInterface {
         var i = 1
         parsedKey.forEach { char: Int ->
             val row = arrayListOf(char)
-            row.addAll(setAlphabetWithStep(i))
+            row.addAll(setAlphabetWithStep(char))
 
             table.add(row)
             i++
         }
     }
 
-    private fun setAlphabetWithStep(step: Int): ArrayList<Int> {
+    private fun setAlphabetWithStep(fchar: Int): ArrayList<Int> {
         val meh = arrayListOf<Int>()
+        val fcharPos = alphabet.indexOf(fchar)
 
-        var start = -step // после того, как цикл подойдет к шндексу превышающему количество элементов алфавита,
-        // надо начинать с 0
-        alphabet.forEach { char ->
-            var index = alphabet.indexOf(char) + step
+        var i = 1
+        var start = 0
+        alphabet.forEach { _ ->
+            var index = fcharPos + i
+            i++
 
             if (index < alphabet.count()) {
                 meh.add(alphabet[index])
             } else {
-                index = start + step
+                index = start
                 meh.add(alphabet[index])
                 start++
             }
+
+            if (alphabet.count() - meh.count() == 1)
+                return meh
         }
 
         return meh
