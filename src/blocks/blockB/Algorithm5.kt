@@ -60,12 +60,14 @@ class Algorithm5 : AlgorithmInterface {
         val keyString = setKeyWordString()
 
         setTable()
+        table.forEach { list ->
+            println("${list.map { it.toChar() }}")
+        }
 
         parsedData.forEach { char ->
-            val charPos = parsedData.indexOf(char)
             result += table.first {
-                it.first() == keyString[charPos]
-            }[charPos].toChar()
+                it.first() == keyString[parsedData.indexOf(char)]
+            }[table.first().indexOf(char)].toChar()
         }
 
         printResult()
