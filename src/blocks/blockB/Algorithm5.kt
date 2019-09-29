@@ -5,20 +5,20 @@ import helpers.*
 import managers.MainMenu
 import sources.Statics
 
-class Algorithm5 : AlgorithmInterface {
+open class Algorithm5 : AlgorithmInterface {
     override lateinit var data: String
 
     override lateinit var parsedData: ArrayList<Int>
 
     override var result: String = ""
 
-    private var keyWord: String = ""
+    protected var keyWord: String = ""
 
-    private lateinit var parsedKey: ArrayList<Int>
+    protected lateinit var parsedKey: ArrayList<Int>
 
-    private var table: ArrayList<ArrayList<Int>> = arrayListOf()
+    protected var table: ArrayList<ArrayList<Int>> = arrayListOf()
 
-    private val alphabet: ArrayList<Int>
+    protected val alphabet: ArrayList<Int>
         get() = concatenateArrayLists(*Statics.connectedAlphabets.toTypedArray())
 
     override fun scanFromTerminal() {
@@ -40,7 +40,7 @@ class Algorithm5 : AlgorithmInterface {
         scanKeyWord()
     }
 
-    private fun scanKeyWord() {
+    protected fun scanKeyWord() {
         Printer.delimiterLine()
         Printer.printKeyWord()
 
@@ -60,9 +60,6 @@ class Algorithm5 : AlgorithmInterface {
         val keyString = setKeyWordString()
 
         setTable()
-        table.forEach { list ->
-            println("${list.map { it.toChar() }}")
-        }
 
         parsedData.forEach { char ->
             result += table.first {
@@ -75,7 +72,7 @@ class Algorithm5 : AlgorithmInterface {
         MainMenu.printMenuCommandList()
     }
 
-    private fun setKeyWordString(): ArrayList<Int> {
+    protected fun setKeyWordString(): ArrayList<Int> {
         val keyString = arrayListOf<Int>()
         val countData = parsedData.count()
 
@@ -111,27 +108,25 @@ class Algorithm5 : AlgorithmInterface {
         return keyString
     }
 
-    private fun setTable() {
+    protected open fun setTable() {
         table.add(alphabet)
 
-        var i = 1
         parsedKey.forEach { char: Int ->
             val row = arrayListOf(char)
             row.addAll(setAlphabetWithStep(char))
 
             table.add(row)
-            i++
         }
     }
 
-    private fun setAlphabetWithStep(fchar: Int): ArrayList<Int> {
+    protected open fun setAlphabetWithStep(char: Int): ArrayList<Int> {
         val meh = arrayListOf<Int>()
-        val fcharPos = alphabet.indexOf(fchar)
+        val charPos = alphabet.indexOf(char)
 
         var i = 1
         var start = 0
         alphabet.forEach { _ ->
-            var index = fcharPos + i
+            var index = charPos + i
             i++
 
             if (index < alphabet.count()) {

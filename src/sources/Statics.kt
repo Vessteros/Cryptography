@@ -25,7 +25,8 @@ object Statics {
         ),
         "B" to hashMapOf(
             1 to "Алгоритм 4",
-            2 to "Алгоритм 5"
+            2 to "Алгоритм 5",
+            3 to "Алгоритм 6"
         )
     )
 
@@ -34,7 +35,8 @@ object Statics {
         "Алгоритм 2" to Algorithm2(),
         "Алгоритм 3" to Algorithm3(),
         "Алгоритм 4" to blocks.blockB.Algorithm4(),
-        "Алгоритм 5" to blocks.blockB.Algorithm5()
+        "Алгоритм 5" to blocks.blockB.Algorithm5(),
+        "Алгоритм 6" to blocks.blockB.Algorithm6()
     )
 
     var algorithm: AlgorithmInterface? = null

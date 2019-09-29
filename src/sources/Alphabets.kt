@@ -42,8 +42,7 @@ val rusLower = arrayListOf(
     'ь'.toInt(),
     'э'.toInt(),
     'ю'.toInt(),
-    'я'.toInt(),
-    ' '.toInt()
+    'я'.toInt()
 )
 val rusUpper = arrayListOf(
     'А'.toInt(),
