@@ -11,11 +11,9 @@ object Statics {
 
     var isFileInput = false
 
-    val fileMap = hashMapOf(
-        "test.txt" to "../files/"
-    )
+    private const val filepath = "/home/vessteros/IdeaProjects/Cryptography/src/files/"
 
-    var chosenFile = "test.txt"
+    var chosenFile = "${filepath}test.in"
 
     val algorithmPull: HashMap<String, HashMap<Int, String>> = hashMapOf(
         "A" to hashMapOf(

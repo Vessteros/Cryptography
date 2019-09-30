@@ -19,6 +19,7 @@ object Printer {
     fun printKeyWord() = print("${ANSI_BLUE}Введите ключ шифрования:$ANSI_RESET\n")
     fun emptyStringType() = print("${ANSI_RED}Была введена пустая строка.${ANSI_RESET}\n")
     fun algorithmNotChosen() = print("\n${ANSI_RED}Не был установлен алгоритм шифрования.${ANSI_RESET}\n")
+    fun readFromFile() = print("${ANSI_BLUE}Считываю текст из файла:${ANSI_RESET}\n")
 
     const val errorChar = "В веденной последовательности присутствует символ из неподключенного алфавита.\n" +
             "Подключите дополнительные алфавиты, либо проверьте введенную последовательность."

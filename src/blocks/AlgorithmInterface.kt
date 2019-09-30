@@ -5,6 +5,7 @@ import helpers.Printer
 import helpers.Printer.errorChar
 import managers.MainMenu
 import sources.Statics
+import java.io.File
 
 interface AlgorithmInterface {
     var data: String
@@ -12,22 +13,31 @@ interface AlgorithmInterface {
 
     var result: String
 
-    fun getFromFile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     fun startAlgorithmLogic() {
         when (Statics.isFileInput) {
             true -> getFromFile()
             false -> scanFromTerminal()
         }
 
-//        try {
+        try {
             encode()
-//        } catch (e: Exception) {
-//            print("${Printer.ANSI_RED}${e.message}${Printer.ANSI_RESET}\n")
-//            MainMenu.printMenuCommandList()
-//        }
+        } catch (e: Exception) {
+            print("${Printer.ANSI_RED}${e.message}${Printer.ANSI_RESET}\n")
+            MainMenu.printMenuCommandList()
+        }
+    }
+
+    fun getFromFile() {
+        Printer.delimiterLine()
+        Printer.readFromFile()
+
+        data = File(Statics.chosenFile)
+            .readText(Charsets.UTF_8)
+
+        parseData()
+
+        println(parsedData.map { it.toChar() }.joinToString(""))
+        Printer.delimiterLine()
     }
 
     fun scanFromTerminal() {
