@@ -3,10 +3,12 @@ package blocks.blockC
 import blocks.AlgorithmInterface
 import helpers.Printer
 import helpers.nullOverChecker
+import sources.Statics
 
 class Algorithm8 : AlgorithmInterface {
     override lateinit var data: String
     override lateinit var parsedData: ArrayList<Int>
+    private val structuredData: ArrayList<ArrayList<Int>> = arrayListOf()
     override var result: String = "Ошибка шифрования"
 
     private lateinit var matrixValues: Pair<Int, Int>
@@ -14,7 +16,29 @@ class Algorithm8 : AlgorithmInterface {
 
     override fun encode() {
         getKeyMatrix()
-        print(keyMatrix)
+        println(keyMatrix)
+        println(parsedData)
+    }
+
+    private fun structData() {
+        structuredData.add(arrayListOf())
+        parsedData.forEachIndexed { _, char ->
+            if (structuredData.last().count() == matrixValues.second) {
+                structuredData.add(arrayListOf())
+            }
+
+            structuredData.last().add(char)
+        }
+
+        val diff = matrixValues.second - structuredData.last().count()
+
+        if (diff > 0) {
+            var i = 0
+            while (i < diff) {
+                structuredData.last().add(Statics.connectedAlphabets.first().first())
+                i--
+            }
+        }
     }
 
     private fun getKeyMatrix() {
@@ -24,6 +48,7 @@ class Algorithm8 : AlgorithmInterface {
             val values = it!!.split(':')
 
             if (values.count() != 2) {
+                Printer.delimiterLine()
                 Printer.wrongStringType()
                 Printer.delimiterLine()
                 getKeyMatrix()
@@ -46,17 +71,18 @@ class Algorithm8 : AlgorithmInterface {
 
         var i = 0
         while (i < matrixValues.first) {
-            println("Введите через запятую числа строки матрицы ключа: ")
             getMatrixLine()
             i++
         }
     }
 
     private fun getMatrixLine() {
+        println("Введите через запятую числа строки матрицы ключа: ")
         readLine().nullOverChecker({ string ->
             val values = string!!.split(',')
 
             if (values.count() != matrixValues.second) {
+                Printer.delimiterLine()
                 Printer.wrongStringType()
                 Printer.delimiterLine()
                 getMatrixLine()
@@ -66,9 +92,10 @@ class Algorithm8 : AlgorithmInterface {
 
             keyMatrix.add(ArrayList(values.map { it.toInt() }))
         },{
+            Printer.delimiterLine()
             Printer.emptyStringType()
             Printer.delimiterLine()
-            getKeyMatrix()
+            getMatrixLine()
 
             return@nullOverChecker
         }, {
