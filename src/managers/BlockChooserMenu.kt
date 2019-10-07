@@ -41,7 +41,7 @@ object BlockChooserMenu : MenuInterface {
             }
         } else {
             when (command) {
-                "A", "B" -> {
+                "A", "B", "C" -> {
                     AlgorithmChooserMenu.algorithmPull = Statics.algorithmPull.getValue(command)
                     AlgorithmChooserMenu.printMenuCommandList()
                 }

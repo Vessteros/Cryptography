@@ -67,3 +67,6 @@ infix fun <M : Map<K, V>, K, V> M.getKeyByValue(value: V): K {
 
     return keys.first()
 }
+
+infix fun Byte.shl(i: Int): Byte = this.toInt().shl(i).toByte()
+infix fun Byte.shr(i: Int): Byte = this.toInt().shr(i).toByte()

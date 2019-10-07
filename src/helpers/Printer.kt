@@ -18,6 +18,7 @@ object Printer {
     fun cryptString() = print("${ANSI_BLUE}Введите строку для шифрования:$ANSI_RESET\n")
     fun printKeyWord() = print("${ANSI_BLUE}Введите ключ шифрования:$ANSI_RESET\n")
     fun emptyStringType() = print("${ANSI_RED}Была введена пустая строка.${ANSI_RESET}\n")
+    fun wrongStringType() = print("${ANSI_RED}Был введен неверный формат строки.${ANSI_RESET}\n")
     fun algorithmNotChosen() = print("\n${ANSI_RED}Не был установлен алгоритм шифрования.${ANSI_RESET}\n")
     fun readFromFile() = print("${ANSI_BLUE}Считываю текст из файла:${ANSI_RESET}\n")
 
