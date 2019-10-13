@@ -1,23 +1,58 @@
 package blocks.blockC
 
 import blocks.AlgorithmInterface
-import helpers.Printer
-import helpers.nullOverChecker
+import helpers.*
+import managers.MainMenu
 import sources.Statics
 
 class Algorithm8 : AlgorithmInterface {
+    // строка с данными
     override lateinit var data: String
-    override lateinit var parsedData: ArrayList<Int>
+    // Массив номеров букв в общем алфавите
+    override var parsedData: ArrayList<Int> = arrayListOf()
+    // Строка номеров букв, разбитая на вектора
     private val structuredData: ArrayList<ArrayList<Int>> = arrayListOf()
-    override var result: String = "Ошибка шифрования"
+    override var result: String = ""
 
     private lateinit var matrixValues: Pair<Int, Int>
     private val keyMatrix: ArrayList<ArrayList<Int>> = arrayListOf()
 
+    override fun parseData() {
+        val alphabet = hashMapOf<Int, Char>()
+        concatenateArrayLists(
+            *Statics.connectedAlphabets.toTypedArray()
+        ).forEachIndexed { key, value ->
+            alphabet[key] = value.toChar()
+        }
+        println(alphabet)
+        data.toCharArray().forEach {
+            parsedData.add(alphabet.getKeyByValue(it))
+        }
+    }
+
     override fun encode() {
         getKeyMatrix()
-        println(keyMatrix)
+        structData()
         println(parsedData)
+        println(structuredData)
+        structuredData.forEach {
+            it.vectorMultiply()
+        }
+
+        printResult()
+
+        MainMenu.printMenuCommandList()
+    }
+
+    private fun <T : ArrayList<Int>> T.vectorMultiply() {
+        keyMatrix.forEach { matrixRow ->
+            var multiply = 0
+            result += ":"
+            matrixRow.forEachIndexed { i, value ->
+                multiply += value * this[i]
+            }
+            result += "$multiply"
+        }
     }
 
     private fun structData() {
@@ -36,7 +71,7 @@ class Algorithm8 : AlgorithmInterface {
             var i = 0
             while (i < diff) {
                 structuredData.last().add(Statics.connectedAlphabets.first().first())
-                i--
+                i++
             }
         }
     }
@@ -60,7 +95,7 @@ class Algorithm8 : AlgorithmInterface {
                 values[0].toInt(),
                 values[1].toInt()
             )
-        },{
+        }, {
             Printer.emptyStringType()
             getKeyMatrix()
 
@@ -91,7 +126,7 @@ class Algorithm8 : AlgorithmInterface {
             }
 
             keyMatrix.add(ArrayList(values.map { it.toInt() }))
-        },{
+        }, {
             Printer.delimiterLine()
             Printer.emptyStringType()
             Printer.delimiterLine()
