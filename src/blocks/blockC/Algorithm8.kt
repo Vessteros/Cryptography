@@ -33,8 +33,6 @@ class Algorithm8 : AlgorithmInterface {
     override fun encode() {
         getKeyMatrix()
         structData()
-        println(parsedData)
-        println(structuredData)
         structuredData.forEach {
             it.vectorMultiply()
         }

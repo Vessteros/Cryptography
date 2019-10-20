@@ -4,6 +4,7 @@ import blocks.AlgorithmInterface
 import blocks.blockA.*
 import blocks.blockB.*
 import blocks.blockC.Algorithm8
+import blocks.blockD.Algorithm10
 import helpers.Printer
 import managers.AlphabetMenu
 import managers.DeleteAlphabetMenu
@@ -30,6 +31,9 @@ object Statics {
         ),
         "C" to hashMapOf(
             1 to "Алгоритм 8"
+        ),
+        "D" to hashMapOf(
+            1 to "Алгоритм 10"
         )
     )
 
@@ -40,7 +44,8 @@ object Statics {
         "Алгоритм 4" to Algorithm4(),
         "Алгоритм 5" to Algorithm5(),
         "Алгоритм 6" to Algorithm6(),
-        "Алгоритм 8" to Algorithm8()
+        "Алгоритм 8" to Algorithm8(),
+        "Алгоритм 10" to Algorithm10()
     )
 
     var algorithm: AlgorithmInterface? = null

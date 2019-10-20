@@ -17,7 +17,7 @@ class Algorithm4 : AlgorithmInterface {
                 val alphabet = getCharAlphabet(char)
                 val alphabetCount = alphabet.count()
 
-                val meh = (alphabet.getCharPosition(char) + 2 * parsedData.getCharPosition(char) + 15).rem(alphabetCount)
+                val meh = (alphabet.getCharPosition(char) + parsedData.getCharPosition(char) + 1).rem(alphabetCount)
 
                 alphabet[meh].toChar()
             }

@@ -27,6 +27,12 @@ interface AlgorithmInterface {
 //        }
     }
 
+    fun clear() {
+        data = ""
+        parsedData = arrayListOf()
+        result = ""
+    }
+
     fun getFromFile() {
         Printer.delimiterLine()
         Printer.readFromFile()
