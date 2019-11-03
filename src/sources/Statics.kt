@@ -18,35 +18,39 @@ object Statics {
 
     var chosenFile = "${filepath}test.in"
 
-    val algorithmPull: HashMap<String, HashMap<Int, String>> = hashMapOf(
-        "A" to hashMapOf(
-            1 to "Алгоритм 1",
-            2 to "Алгоритм 2",
-            3 to "Алгоритм 3"
-        ),
-        "B" to hashMapOf(
-            1 to "Алгоритм 4",
-            2 to "Алгоритм 5",
-            3 to "Алгоритм 6"
-        ),
-        "C" to hashMapOf(
-            1 to "Алгоритм 8"
-        ),
-        "D" to hashMapOf(
-            1 to "Алгоритм 10"
+    val algorithmPull: HashMap<String, HashMap<Int, String>>
+        get() = hashMapOf(
+            "A" to hashMapOf(
+                1 to "Алгоритм 1",
+                2 to "Алгоритм 2",
+                3 to "Алгоритм 3"
+            ),
+            "B" to hashMapOf(
+                1 to "Алгоритм 4",
+                2 to "Алгоритм 5",
+                3 to "Алгоритм 6",
+                4 to "Алгоритм 7"
+            ),
+            "C" to hashMapOf(
+                1 to "Алгоритм 8"
+            ),
+            "D" to hashMapOf(
+                1 to "Алгоритм 10"
+            )
         )
-    )
 
-    val algorithmMap = hashMapOf(
-        "Алгоритм 1" to Algorithm1(),
-        "Алгоритм 2" to Algorithm2(),
-        "Алгоритм 3" to Algorithm3(),
-        "Алгоритм 4" to Algorithm4(),
-        "Алгоритм 5" to Algorithm5(),
-        "Алгоритм 6" to Algorithm6(),
-        "Алгоритм 8" to Algorithm8(),
-        "Алгоритм 10" to Algorithm10()
-    )
+    val algorithmMap: HashMap<String, AlgorithmInterface>
+        get() = hashMapOf(
+            "Алгоритм 1" to Algorithm1(),
+            "Алгоритм 2" to Algorithm2(),
+            "Алгоритм 3" to Algorithm3(),
+            "Алгоритм 4" to Algorithm4(),
+            "Алгоритм 5" to Algorithm5(),
+            "Алгоритм 6" to Algorithm6(),
+            "Алгоритм 7" to Algorithm7(),
+            "Алгоритм 8" to Algorithm8(),
+            "Алгоритм 10" to Algorithm10()
+        )
 
     var algorithm: AlgorithmInterface? = null
 

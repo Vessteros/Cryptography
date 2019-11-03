@@ -19,12 +19,17 @@ interface AlgorithmInterface {
             false -> scanFromTerminal()
         }
 
+        parseData()
+
+//        println(parsedData.map { it.toChar() }.joinToString(""))
 //        try {
             encode()
 //        } catch (e: Exception) {
 //            print("${Printer.ANSI_RED}${e.message}${Printer.ANSI_RESET}\n")
 //            MainMenu.printMenuCommandList()
 //        }
+
+        clear()
     }
 
     fun clear() {
@@ -40,9 +45,6 @@ interface AlgorithmInterface {
         data = File(Statics.chosenFile)
             .readText(Charsets.UTF_8)
 
-        parseData()
-
-        println(parsedData.map { it.toChar() }.joinToString(""))
         Printer.delimiterLine()
     }
 
@@ -59,8 +61,6 @@ interface AlgorithmInterface {
         }, {
             it == ""
         })
-
-        parseData()
     }
 
     fun parseData() {
