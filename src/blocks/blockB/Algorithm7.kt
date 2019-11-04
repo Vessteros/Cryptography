@@ -51,7 +51,7 @@ class Algorithm7 : AlgorithmInterface {
     }
 
     override fun parseData() {
-        val meh = data.convertToIntArray().map { Integer.toBinaryString(it) }.joinToString("")
+        val meh = data.convertToIntArray().joinToString("") { Integer.toBinaryString(it) }
 
         var nyan = 0
         var menyan = 0

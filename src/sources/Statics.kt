@@ -3,8 +3,9 @@ package sources
 import blocks.AlgorithmInterface
 import blocks.blockA.*
 import blocks.blockB.*
-import blocks.blockC.Algorithm8
-import blocks.blockD.Algorithm10
+import blocks.blockC.*
+import blocks.blockD.*
+import blocks.blockG.*
 import helpers.Printer
 import managers.AlphabetMenu
 import managers.DeleteAlphabetMenu
@@ -36,6 +37,9 @@ object Statics {
             ),
             "D" to hashMapOf(
                 1 to "Алгоритм 10"
+            ),
+            "G" to hashMapOf(
+                1 to "Алгоритм 17"
             )
         )
 
@@ -49,7 +53,8 @@ object Statics {
             "Алгоритм 6" to Algorithm6(),
             "Алгоритм 7" to Algorithm7(),
             "Алгоритм 8" to Algorithm8(),
-            "Алгоритм 10" to Algorithm10()
+            "Алгоритм 10" to Algorithm10(),
+            "Алгоритм 17" to Algorithm17()
         )
 
     var algorithm: AlgorithmInterface? = null
